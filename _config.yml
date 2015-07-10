@@ -1,0 +1,13 @@
+# Site settings
+title: David Spence
+email: email@domain.com
+description: > # this means to ignore newlines until "baseurl:"
+  There's always time for a nice cup of tea.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: big_spenc
+github_username:  spencerooni
+stackoverflow_id: 609176
+
+# Build settings
+markdown: kramdown
