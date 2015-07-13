@@ -26,7 +26,7 @@ I won't go into the detail which this blog has done, so expect some short, sweet
 
 * Kibana - visualize your data from elasticsearch.
 
-## Pre-requisites
+## Prerequisites
 * Java. It's required for logash. It also must be on your path.
   * [Grab it from Oracle's website](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) if you need it.
   * Follow instructions on [this Stack Overflow answer](http://stackoverflow.com/a/6521412/609176) if you're not sure how to add Java to your path. You'll want to add:
@@ -93,12 +93,15 @@ filter {
 		match => ["message", "%{TIMESTAMP_ISO8601:log_timestamp} %{IPORHOST:site} %{WORD:http_method} %{URIPATH:page} %{NOTSPACE:query_string} %{NUMBER:port} %{NOTSPACE:username} %{IPORHOST:client_host} %{NOTSPACE:useragent} %{NUMBER:http_response} %{NUMBER:sub_response} %{NUMBER:sc_status} %{NUMBER:time_taken}"]
 	}
   
-	# set the Event Timestamp from the log
+	# set the event timestamp from the log
+	# https://www.elastic.co/guide/en/logstash/current/plugins-filters-date.html
 	date {
 		match => [ "log_timestamp", "YYYY-MM-dd HH:mm:ss" ]
 		timezone => "Etc/UCT"
 	}
 	
+	# matches the big, long nasty useragent string to the actual browser name, version, etc
+	# https://www.elastic.co/guide/en/logstash/current/plugins-filters-useragent.html
 	useragent {
 		source=> "useragent"
 		prefix=> "browser_"
@@ -182,13 +185,22 @@ You'll need to have a few logs in elasticsearch to complete the Kibana setup. Wh
 
 The basic IIS logs contain some useful data, like http response code, response time and the requested URI. This should give enough information to identity some problems in our web application. We could easily tell if response times are more than a second or we're getting lots of 404s, 500s, etc.
 
-<b>Can't find your terms?</b> They're probably cached by Kibana. Follow these steps:
+Some examples below. You can see the filter criteria I have used in the left pane.
+
+#### http response codes
+<image src="/images/kibana-http-resonse-codes.png" alt="kibana-http-response-codes" />
+
+<br>
+
+#### browser breakdown
+<image src="/images/kibana-browser-breakdown.png" alt="kibana-browser-breakdown" />
+
+<br>
+
+<b>Can't find your terms?</b> They're probably cached by Kibana.
 
 * Click "Settings"
 * Select your index
 * Click "Reload field list" (the yellow button)
 
-
-
-{% highlight ruby %}
-{% endhighlight %}
+<img src="/images/kibana-settings-reload-indicies.png" alt="kibana-settings-reload-indicies"/>
