@@ -51,7 +51,7 @@ Extract each zip to a common folder (I've called mine "monitoring"). You should 
 
 ### logstash
 
-First, some explanation. We want to take a standard log line from a wen application running on IIS, which looks like...
+First, some explanation. We want to take a standard log line from a web application running on IIS, which looks like...
 
 <code>2015-07-09 09:21:32 ::1 POST /WebApplication/Claims/1 - 80 - ::1 Mozilla/5.0+(Windows+NT+6.1;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/43.0.2357.132+Safari/537.36 200 0 0 84
 </code>
@@ -140,7 +140,7 @@ Now, once elasticsearch is running, any new log lines will now be pushed there i
 Open a command prompt and navigate to the bin directory for elasticsearch.
 
 <code>
-cd C:\Monitoring\elasticsearch\bin
+cd C:\monitoring\elasticsearch\bin
 </code>
 
 As a one off, you'll need to run the install command.
@@ -172,7 +172,7 @@ The simplest one!
 
 <pre>
 <code>
-cd C:\Monitoring\kibana\bin
+cd C:\monitoring\kibana\bin
 kibana.bat
 </code>
 </pre>
