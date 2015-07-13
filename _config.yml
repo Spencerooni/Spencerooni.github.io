@@ -4,10 +4,11 @@ email: email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
   There's always time for a nice cup of tea.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://spencerooni.github.io" # the base hostname & protocol for your site
+url: http://spencerooni.github.io # the base hostname & protocol for your site
 twitter_username: big_spenc
 github_username:  spencerooni
 stackoverflow_id: 609176
+google_analytics_tracking_code: UA-62067468-1
 
 # Build settings
 markdown: kramdown
