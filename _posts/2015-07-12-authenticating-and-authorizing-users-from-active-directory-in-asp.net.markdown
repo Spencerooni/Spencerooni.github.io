@@ -8,6 +8,7 @@ tags:
 - asp.net-mvc
 - active-directory
 - web.config
+excerpt: Learn how to leverage Active Directory for authorization and roles in your ASP.NET web application.
 ---
 
 So you have your users and roles setup in Active Directory and you want to leverage them for authorization and roles in your ASP.NET web application? Look no further! 

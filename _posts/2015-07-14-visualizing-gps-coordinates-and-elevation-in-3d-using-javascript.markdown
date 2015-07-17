@@ -10,6 +10,7 @@ tags:
 - 3D
 - graph
 - strava
+excerpt: Investigating options for visualizing GPS co-ordinates and elevation in interactive 3D charts using JavaScript.
 ---
 
 I recently saw a feature on <a href="http://blog.veloviewer.com/interactive3d-elevation-profiles" target="_blank">Veloviewer</a>, which I thought was really nice and wanted to see how difficult it would be to replicate. The feature being _interactive 3D elevation profiles_. Instead of displaying a basic graph of elevation over time, they display the elevation at each GPS co-ordinate in a lovely 3D graph.

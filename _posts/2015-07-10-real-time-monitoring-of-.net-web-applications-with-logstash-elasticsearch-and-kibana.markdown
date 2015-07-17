@@ -10,6 +10,7 @@ tags:
 - windows
 - elk
 - iis
+excerpt: Configure logstash, elasticsearch and Kibana (the ELK stack) on Windows to create a real time monitoring solution for your web application.
 ---
 
 ## Intro
