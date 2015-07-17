@@ -14,15 +14,14 @@ tags:
 
 I recently saw a feature on <a href="http://blog.veloviewer.com/interactive3d-elevation-profiles" target="_blank">Veloviewer</a>, which I thought was really nice and wanted to see how difficult it would be to replicate. The feature being _interactive 3D elevation profiles_. Instead of displaying a basic graph of elevation over time, they display the elevation at each GPS co-ordinate in a lovely 3D graph.
 
-A picture speaks a thousand words:
+Here's what they have:
 
-![veloviewer 3d profile](/images/veloviewer-3d-profile.png)
+<iframe class="segEmbed" style="width:100%;height:450px;" src="http://veloviewer.com/segment/4397805/embed?" frameborder="0" scrolling="no"></iframe>
 
 <br>
-You can play with a few of them live on the Veloviewer website:
+You can play with a few more of them live on the Veloviewer website:
 
-- <a href="http://veloviewer.com/segment/627910/photos" target="_blank">http://veloviewer.com/segment/627910/photos</a>
-- <a href="http://veloviewer.com/segment/652851/photos" target="_blank">http://veloviewer.com/segment/652851/photos</a>
+- <a href="http://veloviewer.com/climbs" target="_blank">http://veloviewer.com/climbs</a>
 
 It's a nice way to visualize the ups, downs and direction changes of your activity, especially given that it's interactive, so you can twist, drag, rotate, zoom, etc. It's a nice feature.
 
