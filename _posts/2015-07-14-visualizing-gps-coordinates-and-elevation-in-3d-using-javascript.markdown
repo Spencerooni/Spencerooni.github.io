@@ -16,7 +16,7 @@ I recently saw a feature on <a href="http://blog.veloviewer.com/interactive3d-el
 
 Here's what they have:
 
-<iframe class="segEmbed" style="width:100%;height:450px;" src="http://veloviewer.com/segment/4397805/embed?" frameborder="0" scrolling="no"></iframe>
+<iframe class="segEmbed" style="width:100%;height:350px;" src="http://veloviewer.com/segment/4397805/embed?" frameborder="0" scrolling="no"></iframe>
 
 <br>
 You can play with a few more of them live on the Veloviewer website:
@@ -27,7 +27,7 @@ It's a nice way to visualize the ups, downs and direction changes of your activi
 
 Why am I interested? Well, I do a bit of cycling and I like my technology. These interests came together and I created <a href="https://www.microsoft.com/en-gb/store/apps/straza-mate/9nblggh0cn1r" target="_blank">a Windows Phone app called Straza Mate</a> which integrates with <a href="https://www.strava.com">Strava</a> (Strava being one of the most popular sites for athletes to upload and share their activities). So I'm interested in what I can do with my data (using <a href="http://strava.github.io/api/" target="_blank">Strava's extremely good API</a>) and nice ways to relay information.
 
-If you want to visualize a ride on Strava like I'm trying to do, you can retrieve the raw activity stream via their <a href="http://strava.github.io/api/v3/streams/" target="_blank">Stream API</a> (you'll need to be authenticated to retrieve your data, so either log in, or if you're a developer, you can pass a valid <code>access_token</code>):
+If you want to visualize a ride on Strava like I'm trying to do, you can retrieve the raw activity stream via their <a href="http://strava.github.io/api/v3/streams/" target="_blank">Stream API</a> (you'll need to have a Strava account and create an application at [strava.com/developers](http://strava.com/developers) to obtain an <code>access_token</code>).
 
 <pre>
 <code>
