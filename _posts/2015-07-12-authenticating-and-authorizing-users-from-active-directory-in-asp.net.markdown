@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Authentication and authorizing users from Active Directory in ASP.NET MVC"
+title:  "Authenticating and authorizing users from Active Directory in ASP.NET MVC"
 date:   2015-07-12 15:10:00
 categories:
 tags:
