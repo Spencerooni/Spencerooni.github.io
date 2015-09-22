@@ -9,7 +9,7 @@ tags:
 excerpt: Basic working examples of SQL injection using MySQL.
 ---
 
-I was describing SQL injection to some trainees today and couldn't find any simple examples which used a variable to replicate a "slightly" realistic scenario (those quotes can be tricky!). So, here are some basic ones. Uncomment @<code>@val</code> as necessary!
+I was describing SQL injection to some trainees today and couldn't find any simple examples which used a variable to replicate a "slightly" realistic scenario (those quotes can be tricky!). So, here are some basic ones. Uncomment <code>@val</code> as necessary!
 
 
 {% highlight sql %}
