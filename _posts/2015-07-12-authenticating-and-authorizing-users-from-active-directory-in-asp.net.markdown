@@ -46,15 +46,30 @@ public class BuildStatusController : Controller
 }
 {% endhighlight c# %}
 
-But adding this <code>[AllowAnonymous]</code> attribute didn't work. The role check in <code>web.config</code> seems to override the ability to allow anonymous access to some parts of the application. Basically, <b>an application wide role check in <code>web.config</code> mixed with allowing anonymous access via attributes doesn't work</b>. My solution was to remove the role check from config and instead add the <code>AnonymousAttribute</code> application wide when the app starts in FilterConfig.cs.
+But adding this <code>[AllowAnonymous]</code> attribute didn't work. The role check in <code>web.config</code> seems to override the ability to allow anonymous access to some parts of the application. Basically, <b>an application wide role check in <code>web.config</code> mixed with allowing anonymous access via attributes doesn't work</b>. My solution was to remove all role checks from config and instead add the basic authorisation check in code when the app starts, so it would be applied application wide. In doing this, any usages of <code>[AllowAnonymous]</code> are honoured.
 
 App_Start/FilterConfig.cs
 
 {% highlight c# %}
-var authorizeAttribute = new AuthorizeAttribute
+public static class FilterConfig
 {
-    Roles = "domainXXX\GroupXXX" // Role = group in Active Directory
-};
+    public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+    {
+        if (filters == null)
+        {
+            throw new ArgumentNullException("filters");
+        }
+
+        filters.Add(new HandleErrorAttribute());
+
+        var authorizeAttribute = new AuthorizeAttribute
+        {
+            Roles = "domainXXX\GroupXXX" // Role = group in Active Directory
+        };
+
+        filters.Add(authorizeAttribute);
+    }
+}
 
 filters.Add(authorizeAttribute);
 {% endhighlight c# %}
