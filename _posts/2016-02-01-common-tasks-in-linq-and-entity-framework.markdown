@@ -30,26 +30,38 @@ var activitesGroupedByMonthAndYear =
 
 
 <h2>Case insensitive string equals search</h2>
-This is easy enough when using LINQ to objects, simply using <code>ToLower()</code> on each string. But in entity framework, doing this will cause all rows to be retured from your database before the equals search is performed. Then the equality check happens in LINQ to objects, not LINQ to sql. To get the correct query generated, you need to do the following:
+This is easy enough when using LINQ to objects, simply using <code>ToLower()</code> on each string.
+
+{% highlight c# %}
+
+var nameToSearchFor = "Dave";
+
+var result =
+	people
+	.Where(p => p.Name.ToLower() == nameToSearchFor.ToLower());
+
+{% endhighlight c# %}
+
+But in entity framework, doing this will cause all rows to be retured from your database before the equals search is performed. Then the equality check happens in LINQ to objects, not LINQ to SQL. To get the correct query generated, you need to do the following:
 
 {% highlight c# %}
 
 var result =
 	people
-	.Where(p => p.Name.Equals("dave", StringComparison.CurrentCultureIgnoreCase));
+	.Where(p => p.Name.Equals("Dave", StringComparison.CurrentCultureIgnoreCase));
 
 {% endhighlight c# %}
 
 <h2>Case insensitive string contains search</h2>
 
-Out of the box, the entity framework provider will do a case insensitive search when just using <code>Contains</code>. It will be converted to a sql "like" where clause (<code>where value like %searchValue%</code>).
+Out of the box, the entity framework provider will do a case insensitive search when just using <code>Contains</code>. It will be converted to a SQL "like" where clause (<code>where value like %searchValue%</code>).
 
 {% highlight c# %}
-var result = people.Where(p => p.Name.Contains("dave"));
+var result = people.Where(p => p.Name.Contains("Dave"));
 {% endhighlight c# %}
 
-The above would generate the following sql:
+The above would generate the following SQL:
 
-{% highlight sql %}
-select * from people where Name like %dave%
+{% highlight SQL %}
+select * from people where Name like %Dave%
 {% endhighlight c# %}
