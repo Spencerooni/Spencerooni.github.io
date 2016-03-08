@@ -14,7 +14,7 @@ excerpt: Configure logstash, elasticsearch and Kibana (the ELK stack) on Windows
 ---
 
 ## Intro
-This is a quick run-through of configuring logstash, elasticsearch and Kibana (the ELK stack) on Windows to create a real time monitoring solution for your web application. It took me around 2 hours to get this setup the first time while following <a href="https://community.ulyaoth.net/threads/how-to-install-logstash-on-a-windows-server-with-kibana-in-iis.17">this excellent blog</a>.
+This is a quick run-through of configuring logstash, elasticsearch and Kibana (the ELK stack) on Windows to create a real time monitoring solution for your web application. It took me around 2 hours to get this setup the first time while following <a href="https://www.ulyaoth.net/resources/tutorial-install-logstash-and-kibana-on-a-windows-server.34/">this excellent blog</a>.
 
 I won't go into the detail which this blog has done, so expect some short, sweet bullet points. Then we'll create some visualizations (pretty pictures) from the basic IIS logs, which could help identify problems with your web application.
 
