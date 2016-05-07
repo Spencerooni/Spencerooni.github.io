@@ -85,6 +85,7 @@ namespace MyApp
         private static void Main(string[] args)
         {
             Logger.InfoFormat("Running as {0}", WindowsIdentity.GetCurrent().Name);
+            Logger.Error("This will appear in red in the console and still be written to file!");
         }
     }
 }
