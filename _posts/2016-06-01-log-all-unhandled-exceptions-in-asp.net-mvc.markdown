@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Log all unhandled exceptions in asp.net MVC"
+title:  "Log all unhandled exceptions in ASP.NET MVC"
 date:   2016-06-01 14:00:00
 categories:
 tags:
@@ -8,7 +8,7 @@ tags:
 - c#
 - .NET
 - asp.net-mvc
-excerpt: Simple logging of unhandled exceptions in asp.net MVC
+excerpt: Simple logging of unhandled exceptions in ASP.NET MVC
 ---
 
 Create a new filter which implements IExceptionFilter and log however you'd like (I'm using log4net's Logger class).
@@ -41,4 +41,4 @@ public static class FilterConfig
 
 {% endhighlight c# %}
 
-That's literally it! Simples!
+That's literally it!
