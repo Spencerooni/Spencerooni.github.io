@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Log all unhandled exceptions in ASP.NET MVC"
-date:   2016-06-01 14:00:00
+date:   2016-06-01 13:00:00
 categories:
 tags:
 - log4net
