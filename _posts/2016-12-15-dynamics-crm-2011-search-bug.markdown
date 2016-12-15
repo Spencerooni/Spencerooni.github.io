@@ -21,7 +21,7 @@ So, the project is in user acceptance testing and a few bugs are being raised. T
 
 Right... that's a bit weird. Sounds ridiculous. Probably something silly. User error. In saying that, I didn't have much reason to doubt them. They'd been pretty bang on with any issues raised up until then.
 
-So I opened up one of our instances of Dynamics CRM to test and navigated to the Client Overview list, typed "David", hit enter, waited for spinner to disappear... and wala! Results! Of course it works! Look, everyone is called Dav... Wait a second... Alison, Andrew, Ben, Bernadette, Claire, David... I cleared the search box (so no search criteria) and hit enter. Same result. Everyone. Page 1 of loads. Not filtered. Typed "david" again, lower case this time. Same result. Everyone. Page 1 of loads. What if I click the search button instead of hitting enter, maybe it's calling something different? Nope, same result.
+So I opened up one of our instances of Dynamics CRM to test and navigated to the Client Overview list, typed "David", hit enter, waited for spinner to disappear... and voila! Results! Of course it works! Look, everyone is called Dav... Wait a second... Alison, Andrew, Ben, Bernadette, Claire, David... I cleared the search box (so no search criteria) and hit enter. Same result. Everyone. Page 1 of loads. Not filtered. Typed "david" again, lower case this time. Same result. Everyone. Page 1 of loads. What if I click the search button instead of hitting enter, maybe it's calling something different? Nope, same result.
 
 So, the obvious questions to ask.
 
@@ -101,7 +101,7 @@ Well, every entity in Dynamics has a set of build in fields as standard. An acco
 
 We'd customised it and added a few of our own, too. But even looking at these, do you notice anything? At this stage I was thinking VERY abstract. Stupidly abstract. Trying to make anything fit. This is the only notion in the system I could think of where the term "id" has any mention in relation with accounts. I felt like when I was on placement, taking snapshot images of remote machines (playing around in those scary terminal menus before your OS boots up) and every time I touched the letter G of the sequence of instructions I had to type, the machine restarted. My manager thought I was nuts. "I swear it's the letter G! It's doing something!". Turned out that was a timing thing and I was so consistent that about five times in a row, I'd typed the letter "G" after the same exact number of seconds, and the machine restarted. This was one of those moments. But...
 
-See how <b>"Telephone"</b> ends in with the word <b>"one"</b>? That was one my my magic "I found another word that returns everything" words.
+See how <b>"Telephone"</b> ends in with the word <b>"one"</b>? That was one my magic "I found another word that returns everything" words.
 
 Navigate to people, search term:
 
