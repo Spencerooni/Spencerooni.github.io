@@ -11,17 +11,37 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Volleyball Rotations">
     <link rel="apple-touch-icon" href="icon.png">
-    <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    
+    <link href="splashscreens/iphone5_splash.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png"
+        media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexr_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexsmax_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipad_splash.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro1_splash.png"
+        media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro3_splash.png"
+        media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro2_splash.png"
+        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+
     <title>Volleyball Rotations</title>
 
     <!-- Required Stylesheets -->
@@ -60,13 +80,6 @@
                             <player v-model="team1Position1" v-on:player-clicked="openPlayerOptions(0, 1)"></player>
                             <player v-model="team1Position2" v-on:player-clicked="openPlayerOptions(0, 2)"></player>
                         </div>
-                        <div class="row mt-1">
-                            <div class="col d-flex justify-content-center">
-                                <b-button class="btn-lg" variant="primary" @click.prevent="rotate(0)">
-                                    <i class="fas fa-sync-alt"></i>
-                                </b-button>
-                            </div>
-                        </div>
                     </div>
                     <div v-else class="d-flex justify-content-center align-items-center mt-3">
                         <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('0')">Add team</b-button>
@@ -75,14 +88,14 @@
 
                 <!-- net -->
                 <div class="col-1">
-                    <div class="row" v-if="teams.length === 2">
+                    <div v-if="teams.length > 0" class="row">
                         <div class="col d-flex justify-content-center">
-                            <b-button variant="primary" @click.prevent="swap()">
-                                <i class="fas fa-exchange-alt"></i>
+                            <b-button variant="danger" class="btn-sm" @click.prevent="reset()">
+                                Reset
                             </b-button>
                         </div>
                     </div>
-                    <div class="row h-100 mt-2 mb-2">
+                    <div class="row h-100 mt-2">
                         <div class="col d-flex justify-content-center">
                             <div class="bg-secondary" style="height: 80%; width: 3px; border: 3px dashed black;"></div>
                         </div>
@@ -109,16 +122,34 @@
                             <player v-model="team2Position4" v-on:player-clicked="openPlayerOptions(1, 4)"></player>
                             <player v-model="team2Position5" v-on:player-clicked="openPlayerOptions(1, 5)"></player>
                         </div>
-                        <div class="row mt-1">
-                            <div class="col d-flex justify-content-center">
-                                <b-button class="btn-lg" variant="primary" @click.prevent="rotate(1)">
-                                    <i class="fas fa-sync-alt"></i>
-                                </b-button>
-                            </div>
-                        </div>
                     </div>
                     <div v-else class="d-flex justify-content-center align-items-center mt-3">
                         <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('1')">Add team</b-button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col">
+                    <div v-if="teams[0] !== undefined" class="col d-flex justify-content-center">
+                        <b-button class="btn-lg" variant="primary" @click.prevent="rotate(0)">
+                            <i class="fas fa-sync-alt"></i>
+                        </b-button>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row" v-if="teams.length === 2">
+                        <div class="col d-flex justify-content-center">
+                            <b-button variant="primary" @click.prevent="swap()">
+                                <i class="fas fa-exchange-alt"></i>
+                            </b-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div v-if="teams[1] !== undefined" class="col d-flex justify-content-center">
+                        <b-button class="btn-lg" variant="primary" @click.prevent="rotate(1)">
+                            <i class="fas fa-sync-alt"></i>
+                        </b-button>
                     </div>
                 </div>
             </div>
@@ -156,7 +187,8 @@
         <b-modal ref="player-options" hide-footer title="Player options">
             <div class="row">
                 <div class="col">
-                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="makeSetter()" type="button" variant="primary">
+                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="makeSetter()" type="button"
+                        variant="primary">
                         Make setter
                     </b-button>
                 </div>
@@ -246,12 +278,12 @@
                 submitTeam() {
                     let players = [];
                     for (var i = 0; i < this.teamEntry.players.length; i++) {
-                      players.push({
-                          playerNumber: this.teamEntry.players[i],
-                          startingPosition: i + 1,
-                          position: i + 1,
-                          isSetter: false,
-                      });
+                        players.push({
+                            playerNumber: this.teamEntry.players[i],
+                            startingPosition: i + 1,
+                            position: i + 1,
+                            isSetter: false,
+                        });
                     }
 
                     this.teams[this.teamEntry.teamNumber] = {
@@ -286,7 +318,7 @@
 
                     this.teams[teamNumber] = teamToRotate;
 
-                    this.copyTeams();                    
+                    this.copyTeams();
                 },
                 copyTeams() {
                     let teamsCopy = [];
@@ -319,6 +351,9 @@
 
                     this.teams = [teamTwo, teamOne];
                     this.copyTeams();
+                },
+                reset() {
+                    this.teams = [];
                 },
             },
         });
