@@ -4,10 +4,25 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-    <title>My first BootstrapVue app</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Volleyball Rotations">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    
+    <title>Volleyball Rotations</title>
 
     <!-- Required Stylesheets -->
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
@@ -24,67 +39,86 @@
     <!-- Our application root element -->
     <div id="app">
         <b-container>
-            <div class="row py-5">
+            <div class="row py-1">
                 <!-- team 1 -->
                 <div class="col">
                     <div v-if="teams[0] !== undefined">
-                        <h1>{{ teams[0].name }}</h1>
                         <div class="row">
-                            <player v-model="team1Position5"></player>
-                            <player v-model="team1Position4"></player>
-                        </div>
-                        <div class="row">
-                            <player v-model="team1Position6"></player>
-                            <player v-model="team1Position3"></player>
-                        </div>
-                        <div class="row">
-                            <player v-model="team1Position1"></player>
-                            <player v-model="team1Position2"></player>
-                        </div>
-                        <div class="row mt-4">
                             <div class="col d-flex justify-content-center">
-                                <b-button class="btn-lg" variant="primary" @click="rotate(0)">
+                                {{ teams[0].name }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <player v-model="team1Position5" v-on:player-clicked="openPlayerOptions(0, 5)"></player>
+                            <player v-model="team1Position4" v-on:player-clicked="openPlayerOptions(0, 4)"></player>
+                        </div>
+                        <div class="row">
+                            <player v-model="team1Position6" v-on:player-clicked="openPlayerOptions(0, 6)"></player>
+                            <player v-model="team1Position3" v-on:player-clicked="openPlayerOptions(0, 3)"></player>
+                        </div>
+                        <div class="row">
+                            <player v-model="team1Position1" v-on:player-clicked="openPlayerOptions(0, 1)"></player>
+                            <player v-model="team1Position2" v-on:player-clicked="openPlayerOptions(0, 2)"></player>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col d-flex justify-content-center">
+                                <b-button class="btn-lg" variant="primary" @click.prevent="rotate(0)">
                                     <i class="fas fa-sync-alt"></i>
                                 </b-button>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="d-flex justify-content-center align-items-center">
-                        <b-button class="btn-lg" variant="primary" @click="setupTeam('0')">Add team</b-button>
+                    <div v-else class="d-flex justify-content-center align-items-center mt-3">
+                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('0')">Add team</b-button>
                     </div>
                 </div>
 
                 <!-- net -->
-                <div class="col-1 d-flex justify-content-center">
-                    <div class="bg-secondary" style="height: 100%; width: 3px;"></div>
+                <div class="col-1">
+                    <div class="row" v-if="teams.length === 2">
+                        <div class="col d-flex justify-content-center">
+                            <b-button variant="primary" @click.prevent="swap()">
+                                <i class="fas fa-exchange-alt"></i>
+                            </b-button>
+                        </div>
+                    </div>
+                    <div class="row h-100 mt-2 mb-2">
+                        <div class="col d-flex justify-content-center">
+                            <div class="bg-secondary" style="height: 80%; width: 3px; border: 3px dashed black;"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- team 2 -->
                 <div class="col">
                     <div v-if="teams[1] !== undefined">
-                        <h1>{{ teams[1].name }}</h1>
                         <div class="row">
-                            <player v-model="team2Position2"></player>
-                            <player v-model="team2Position1"></player>
-                        </div>
-                        <div class="row">
-                            <player v-model="team2Position3"></player>
-                            <player v-model="team2Position6"></player>
-                        </div>
-                        <div class="row">
-                            <player v-model="team2Position4"></player>
-                            <player v-model="team2Position5"></player>
-                        </div>
-                        <div class="row mt-4">
                             <div class="col d-flex justify-content-center">
-                                <b-button class="btn-lg" variant="primary" @click="rotate(1)">
+                                {{ teams[1].name }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <player v-model="team2Position2" v-on:player-clicked="openPlayerOptions(1, 2)"></player>
+                            <player v-model="team2Position1" v-on:player-clicked="openPlayerOptions(1, 1)"></player>
+                        </div>
+                        <div class="row">
+                            <player v-model="team2Position3" v-on:player-clicked="openPlayerOptions(1, 3)"></player>
+                            <player v-model="team2Position6" v-on:player-clicked="openPlayerOptions(1, 6)"></player>
+                        </div>
+                        <div class="row">
+                            <player v-model="team2Position4" v-on:player-clicked="openPlayerOptions(1, 4)"></player>
+                            <player v-model="team2Position5" v-on:player-clicked="openPlayerOptions(1, 5)"></player>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col d-flex justify-content-center">
+                                <b-button class="btn-lg" variant="primary" @click.prevent="rotate(1)">
                                     <i class="fas fa-sync-alt"></i>
                                 </b-button>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="d-flex justify-content-center align-items-center">
-                        <b-button class="btn-lg" variant="primary" @click="setupTeam('1')">Add team</b-button>
+                    <div v-else class="d-flex justify-content-center align-items-center mt-3">
+                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('1')">Add team</b-button>
                     </div>
                 </div>
             </div>
@@ -102,21 +136,31 @@
                     <div class="col">
                         <label>Players (in rotation)</label>
                         <div v-for="i in 6" class="pb-1">
-                            <b-form-input v-model="teamEntry.players[i - 1]" type="number" required
-                                :placeholder="i.toString()">
+                            <b-form-input v-model="teamEntry.players[i - 1]" type="text" required
+                                :placeholder="i.toString()" pattern="\d*">
                             </b-form-input>
                         </div>
                     </div>
                     <div class="col">
                         <label>Subs (no particular order)</label>
                         <div v-for="i in 6" class="pb-1">
-                            <b-form-input v-model="teamEntry.subs[i - 1]" type="number">
+                            <b-form-input v-model="teamEntry.subs[i - 1]" type="text" pattern="\d*">
                             </b-form-input>
                         </div>
                     </div>
                 </div>
                 <b-button class="mt-2 btn-lg btn-block" type="submit" variant="primary">Confirm</b-button>
             </b-form>
+        </b-modal>
+
+        <b-modal ref="player-options" hide-footer title="Player options">
+            <div class="row">
+                <div class="col">
+                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="makeSetter()" type="button" variant="primary">
+                        Make setter
+                    </b-button>
+                </div>
+            </div>
         </b-modal>
     </div>
 
@@ -126,11 +170,21 @@
         Vue.component('Player', {
             props: ['value'],
             template:
-                `<div class="col d-flex justify-content-center mt-1 mb-1">
-                    <div class="rounded-circle border border-primary d-flex justify-content-center align-items-center" style="background-color: white; width: 75px; height: 75px;">
+                `<div class="col d-flex justify-content-center mt-1 mb-1" @click="click()">
+                    <div :class="['rounded-circle', 'border', borderStyle, 'd-flex', 'justify-content-center', 'align-items-center']" style="background-color: white; width: 55px; height: 55px;">
                         <b>{{ value.playerNumber }}</b>
                     </div>
-                </div>`
+                </div>`,
+            methods: {
+                click() {
+                    this.$emit('player-clicked');
+                },
+            },
+            computed: {
+                borderStyle() {
+                    return this.value.isSetter === true ? 'border-warning' : 'border-primary';
+                },
+            },
         });
 
         window.app = new Vue({
@@ -181,7 +235,8 @@
                     name: '',
                     players: [],
                     subs: [],
-                }
+                },
+                playerToUpdate: null,
             },
             methods: {
                 setupTeam(teamNumber) {
@@ -195,6 +250,7 @@
                           playerNumber: this.teamEntry.players[i],
                           startingPosition: i + 1,
                           position: i + 1,
+                          isSetter: false,
                       });
                     }
 
@@ -240,7 +296,30 @@
                     }
 
                     this.teams = teamsCopy;
-                }
+                },
+                openPlayerOptions(teamNumber, position) {
+                    this.playerToUpdate = {
+                        teamNumber: teamNumber,
+                        position: position,
+                    };
+                    this.$refs['player-options'].show();
+                },
+                makeSetter() {
+                    let team = this.teams[this.playerToUpdate.teamNumber];
+                    for (var i = 0; i < team.players.length; i++) {
+                        let player = team.players[i];
+                        player.isSetter = (player.position === this.playerToUpdate.position);
+                    }
+                    this.copyTeams();
+                    this.$refs['player-options'].hide();
+                },
+                swap() {
+                    let teamOne = this.teams[0];
+                    let teamTwo = this.teams[1];
+
+                    this.teams = [teamTwo, teamOne];
+                    this.copyTeams();
+                },
             },
         });
     </script>
