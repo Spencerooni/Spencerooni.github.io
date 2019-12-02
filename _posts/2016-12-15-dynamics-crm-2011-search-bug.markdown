@@ -85,7 +85,7 @@ What do "david" and "one" have in common? Let's go back to "David" a second beca
 
 All results. Page 1 of loads.
 
-Aha! So it's not David that it's broken for. Turns out just typing the last two words of my name "id" returned everyone. In fact, turns out typing "id" with any letters before, after on inbetween other letters returned every record. So "xid" and "idx" and "xidx" returned everyone. So "id" is a programmer-ish thing, right? Maybe a developer on the Dynamics CRM team has made a mistake in the query which gets run in the very specific situation when the search term begins or ends with id... But that doesn't explain why the term "one" returns everyone. "id" != "one".
+Aha! So it's not David that it's broken for. Turns out just typing the last two letters of my name "id" returned everyone. In fact, turns out typing "id" with any letters before, after on inbetween other letters returned every record. So "xid" and "idx" and "xidx" returned everyone. So "id" is a programmer-ish thing, right? Maybe a developer on the Dynamics CRM team has made a mistake in the query which gets run in the very specific situation when the search term begins or ends with id... But that doesn't explain why the term "one" returns everyone. "id" != "one".
 
 Any ideas yet?
 
