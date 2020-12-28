@@ -179,35 +179,29 @@
                         <label>Players</label>
                         <div class="row mb-2">
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[3]" type="text" required
-                                    placeholder="4" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[3]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[2]" type="text" required
-                                    placeholder="3" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[2]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[1]" type="text" required
-                                    placeholder="2" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[1]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[4]" type="text" required
-                                    placeholder="5" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[4]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[5]" type="text" required
-                                    placeholder="6" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[5]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[0]" type="text" required
-                                    placeholder="1" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[0]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                         </div>
@@ -230,35 +224,29 @@
                         <label>Players</label>
                         <div class="row mb-2">
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[3]" type="text" required
-                                    placeholder="4" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[3]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[2]" type="text" required
-                                    placeholder="3" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[2]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[1]" type="text" required
-                                    placeholder="2" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[1]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[4]" type="text" required
-                                    placeholder="5" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[4]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[5]" type="text" required
-                                    placeholder="6" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[5]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                             <div class="col">
-                                <b-form-input v-model="teamEntry.players[0]" type="text" required
-                                    placeholder="1" pattern="\d*">
+                                <b-form-input v-model="teamEntry.players[0]" type="text" required pattern="\d*">
                                 </b-form-input>
                             </div>
                         </div>
@@ -392,7 +380,6 @@
                     this.teamEntry.teamNumber = teamNumber;
                     this.teamEntry.name = teamToEdit.name;
                     this.teamEntry.players = teamToEdit.players.map(x => x.playerNumber);
-                    debugger;
                     this.$refs['edit-team'].show();
                 },
                 submitTeamChanges() {
