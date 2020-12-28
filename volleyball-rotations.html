@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
+    <link rel="manifest" href="manifest.webmanifest">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Volleyball Rotations">
@@ -64,8 +66,9 @@
                 <div class="col">
                     <div v-if="teams[0] !== undefined">
                         <div class="row">
-                            <div class="col d-flex justify-content-center">
-                                {{ teams[0].name }}
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <span>{{ teams[0].name }}</span>
+                                <i class="fas fa-edit ml-2" @click="editTeam(0)"></i>
                             </div>
                         </div>
                         <div class="row">
@@ -82,7 +85,10 @@
                         </div>
                     </div>
                     <div v-else class="d-flex justify-content-center align-items-center mt-3">
-                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('0')">Add team</b-button>
+                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('0')">
+                            <i class="fas fa-volleyball-ball mr-1"></i>
+                            <i class="fas fa-users-cog"></i>
+                        </b-button>
                     </div>
                 </div>
 
@@ -106,8 +112,9 @@
                 <div class="col">
                     <div v-if="teams[1] !== undefined">
                         <div class="row">
-                            <div class="col d-flex justify-content-center">
-                                {{ teams[1].name }}
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <span>{{ teams[1].name }}</span>
+                                <i class="fas fa-edit ml-2" @click="editTeam(1)"></i>
                             </div>
                         </div>
                         <div class="row">
@@ -124,22 +131,25 @@
                         </div>
                     </div>
                     <div v-else class="d-flex justify-content-center align-items-center mt-3">
-                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('1')">Add team</b-button>
+                        <b-button class="btn-lg" variant="primary" @click.prevent="setupTeam('1')">
+                            <i class="fas fa-volleyball-ball mr-1"></i>
+                            <i class="fas fa-users-cog"></i>
+                        </b-button>
                     </div>
                 </div>
             </div>
             <div class="row mt-1">
                 <div class="col">
                     <div v-if="teams[0] !== undefined" class="col d-flex justify-content-center">
-                        <b-button class="btn-lg" variant="primary" @click.prevent="rotate(0)">
-                            <i class="fas fa-sync-alt"></i>
+                        <b-button class="btn-lg" variant="warning" @click.prevent="rotate(0)">
+                            <i class="fas fa-undo fa-flip-horizontal"></i>
                         </b-button>
                     </div>
                 </div>
                 <div class="col-1">
                     <div class="row" v-if="teams.length === 2">
                         <div class="col d-flex justify-content-center">
-                            <b-button variant="primary" @click.prevent="swap()">
+                            <b-button variant="secondary" class="btn-sm" @click.prevent="swap()">
                                 <i class="fas fa-exchange-alt"></i>
                             </b-button>
                         </div>
@@ -147,8 +157,8 @@
                 </div>
                 <div class="col">
                     <div v-if="teams[1] !== undefined" class="col d-flex justify-content-center">
-                        <b-button class="btn-lg" variant="primary" @click.prevent="rotate(1)">
-                            <i class="fas fa-sync-alt"></i>
+                        <b-button class="btn-lg" variant="warning" @click.prevent="rotate(1)">
+                            <i class="fas fa-undo fa-flip-horizontal"></i>
                         </b-button>
                     </div>
                 </div>
@@ -165,18 +175,91 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <label>Players (in rotation)</label>
-                        <div v-for="i in 6" class="pb-1">
-                            <b-form-input v-model="teamEntry.players[i - 1]" type="text" required
-                                :placeholder="i.toString()" pattern="\d*">
-                            </b-form-input>
+                        <label>Players</label>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[3]" type="text" required
+                                    placeholder="4" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[2]" type="text" required
+                                    placeholder="3" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[1]" type="text" required
+                                    placeholder="2" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[4]" type="text" required
+                                    placeholder="5" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[5]" type="text" required
+                                    placeholder="6" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[0]" type="text" required
+                                    placeholder="1" pattern="\d*">
+                                </b-form-input>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <b-button class="mt-2 btn-lg btn-block" type="submit" variant="primary">Confirm</b-button>
+            </b-form>
+        </b-modal>
+
+        <b-modal ref="edit-team" hide-footer title="Change team">
+            <b-form autocomplete="off" @submit.prevent="submitTeamChanges()">
+                <div class="row">
                     <div class="col">
-                        <label>Subs (no particular order)</label>
-                        <div v-for="i in 6" class="pb-1">
-                            <b-form-input v-model="teamEntry.subs[i - 1]" type="text" pattern="\d*">
-                            </b-form-input>
+                        <b-form-input v-model="teamEntry.name" type="text" required placeholder="Team name">
+                        </b-form-input>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <label>Players</label>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[3]" type="text" required
+                                    placeholder="4" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[2]" type="text" required
+                                    placeholder="3" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[1]" type="text" required
+                                    placeholder="2" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[4]" type="text" required
+                                    placeholder="5" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[5]" type="text" required
+                                    placeholder="6" pattern="\d*">
+                                </b-form-input>
+                            </div>
+                            <div class="col">
+                                <b-form-input v-model="teamEntry.players[0]" type="text" required
+                                    placeholder="1" pattern="\d*">
+                                </b-form-input>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,10 +272,34 @@
                 <div class="col">
                     <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="makeSetter()" type="button"
                         variant="primary">
-                        Make setter
+                        Highlight setter
+                    </b-button>
+                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="openSubOptions()" type="button"
+                        variant="primary">
+                        Sub
                     </b-button>
                 </div>
             </div>
+        </b-modal>
+
+        <b-modal ref="sub-options" hide-footer title="Substitution">
+            <b-form autocomplete="off" @submit.prevent="confirmSub()">
+                <div class="row">
+                    <div class="col">
+                        <label for="sub-for-player-number">Which player is coming on?</label>
+                    </div>
+                    <div class="col">
+                        <b-form-input v-model="subForPlayerNumber" type="text" id="sub-for-player-number" required
+                            placeholder="" pattern="\d*">
+                        </b-form-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b-button class="mt-2 btn-lg btn-block" type="submit" variant="primary">Confirm</b-button>
+                    </div>
+                </div>
+            </b-form>
         </b-modal>
     </div>
 
@@ -202,8 +309,8 @@
         Vue.component('Player', {
             props: ['value'],
             template:
-                `<div class="col d-flex justify-content-center mt-1 mb-1" @click="click()">
-                    <div :class="['rounded-circle', 'border', borderStyle, 'd-flex', 'justify-content-center', 'align-items-center']" style="background-color: white; width: 55px; height: 55px;">
+                `<div class="col d-flex justify-content-center mt-1 mb-1">
+                    <div :class="['rounded-circle', 'border', borderStyle, 'd-flex', 'justify-content-center', 'align-items-center']" @click="click()" style="background-color: white; width: 55px; height: 55px;">
                         <b>{{ value.playerNumber }}</b>
                     </div>
                 </div>`,
@@ -266,12 +373,48 @@
                     number: null,
                     name: '',
                     players: [],
-                    subs: [],
                 },
                 playerToUpdate: null,
+                subForPlayerNumber: null,
             },
             methods: {
+                clearTeamEntry() {
+                    this.teamEntry = {
+                        teamNumber: null,
+                        name: '',
+                        players: [],
+                    };
+                },
+                editTeam(teamNumber) {
+                    this.clearTeamEntry();
+                    let teamToEdit = this.teams[teamNumber];
+                    this.teamEntry.teamNumber = teamNumber;
+                    this.teamEntry.name = teamToEdit.name;
+                    this.teamEntry.players = teamToEdit.players.map(x => x.playerNumber);
+                    debugger;
+                    this.$refs['edit-team'].show();
+                },
+                submitTeamChanges() {
+                    let players = [];
+                    for (var i = 0; i < this.teamEntry.players.length; i++) {
+                        players.push({
+                            playerNumber: this.teamEntry.players[i],
+                            startingPosition: i + 1,
+                            position: i + 1,
+                            isSetter: false,
+                        });
+                    }
+
+                    this.teams[this.teamEntry.teamNumber] = {
+                        name: this.teamEntry.name,
+                        players: players,
+                    };
+
+                    this.copyTeams();
+                    this.$refs['edit-team'].hide();
+                },
                 setupTeam(teamNumber) {
+                    this.clearTeamEntry();
                     this.teamEntry.teamNumber = teamNumber;
                     this.$refs['team-setup'].show();
                 },
@@ -289,19 +432,9 @@
                     this.teams[this.teamEntry.teamNumber] = {
                         name: this.teamEntry.name,
                         players: players,
-                        subs: this.teamEntry.subs,
                     };
 
                     this.copyTeams();
-
-                    // clear team entry
-                    this.teamEntry = {
-                        teamNumber: null,
-                        name: '',
-                        players: [],
-                        subs: [],
-                    };
-
                     this.$refs['team-setup'].hide();
                 },
                 rotate(teamNumber) {
@@ -344,6 +477,17 @@
                     }
                     this.copyTeams();
                     this.$refs['player-options'].hide();
+                },
+                openSubOptions() {
+                    this.$refs['player-options'].hide();
+                    this.subForPlayerNumber = null;
+                    this.$refs['sub-options'].show();
+                },
+                confirmSub() {
+                    let team = this.teams[this.playerToUpdate.teamNumber];
+                    let player = team.players.find(x => x.position === this.playerToUpdate.position);
+                    player.playerNumber = this.subForPlayerNumber;
+                    this.$refs['sub-options'].hide();
                 },
                 swap() {
                     let teamOne = this.teams[0];
