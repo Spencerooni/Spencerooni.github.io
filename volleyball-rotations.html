@@ -259,16 +259,13 @@
         <b-modal ref="player-options" hide-footer title="Player options">
             <div class="row">
                 <div class="col">
-                    <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" class="mt-1 mb-1 btn-lg btn-block" @click.prevent="unhighlight()" type="button"
-                    variant="primary">
+                    <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" @click.prevent="unhighlight()" type="button" variant="primary">
                         Unhighlight
                     </b-button>
-                    <b-button v-else class="mt-1 mb-1 btn-lg btn-block" @click.prevent="highlight()" type="button"
-                        variant="primary">
+                    <b-button v-else class="mt-1 mb-1 btn-lg btn-block" @click.prevent="highlight()" type="button" variant="primary">
                         Highlight
                     </b-button>
-                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="openSubOptions()" type="button"
-                        variant="primary">
+                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="openSubOptions()" type="button" variant="primary">
                         Sub
                     </b-button>
                 </div>
@@ -290,6 +287,24 @@
                 <div class="row">
                     <div class="col">
                         <b-button class="mt-2 btn-lg btn-block" type="submit" variant="primary">Confirm</b-button>
+                    </div>
+                </div>
+            </b-form>
+        </b-modal>
+
+        <b-modal ref="confirm-reset" hide-footer title="Reset">
+            <b-form autocomplete="off" @submit.prevent="confirmReset()">
+                <div class="row">
+                    <div class="col">
+                        Are you sure you want to start over?
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <b-button class="btn-lg btn-block" type="submit" variant="danger">Yes</b-button>
+                    </div>
+                    <div class="col">
+                        <b-button class="btn-lg btn-block" type="button" variant="light" @click="cancelReset()">No</b-button>
                     </div>
                 </div>
             </b-form>
@@ -503,7 +518,14 @@
                     this.copyTeams();
                 },
                 reset() {
+                    this.$refs['confirm-reset'].show();
+                },
+                confirmReset() {
                     this.teams = [];
+                    this.$refs['confirm-reset'].hide();
+                },
+                cancelReset() {
+                    this.$refs['confirm-reset'].hide();
                 },
             },
         });
