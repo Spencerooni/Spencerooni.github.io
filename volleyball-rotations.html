@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <!-- Required meta tags -->
@@ -58,29 +58,29 @@
     <script src="https://kit.fontawesome.com/1f9e195355.js"></script>
 </head>
 
-<body class="bg-light">
+<body class="bg-light h-100">
     <!-- Our application root element -->
-    <div id="app">
-        <b-container>
-            <div class="row py-1">
+    <div id="app" class="h-100">
+        <b-container class="h-100 d-flex flex-column">
+            <div class="row py-1 flex-grow-1">
                 <!-- team 1 -->
                 <div class="col">
-                    <div v-if="teams[0] !== undefined">
-                        <div class="row">
+                    <div v-if="teams[0] !== undefined" class="d-flex flex-column h-100">
+                        <div class="row flex-grow-1">
                             <div class="col d-flex justify-content-center align-items-center">
                                 <span>{{ teams[0].name }}</span>
                                 <i class="fas fa-edit ml-2" @click="editTeam(0)"></i>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team1Position5" v-on:player-clicked="openPlayerOptions(0, 5)"></player>
                             <player v-model="team1Position4" v-on:player-clicked="openPlayerOptions(0, 4)"></player>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team1Position6" v-on:player-clicked="openPlayerOptions(0, 6)"></player>
                             <player v-model="team1Position3" v-on:player-clicked="openPlayerOptions(0, 3)"></player>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team1Position1" v-on:player-clicked="openPlayerOptions(0, 1)"></player>
                             <player v-model="team1Position2" v-on:player-clicked="openPlayerOptions(0, 2)"></player>
                         </div>
@@ -111,22 +111,22 @@
 
                 <!-- team 2 -->
                 <div class="col">
-                    <div v-if="teams[1] !== undefined">
-                        <div class="row">
+                    <div v-if="teams[1] !== undefined" class="d-flex flex-column h-100">
+                        <div class="row flex-grow-1">
                             <div class="col d-flex justify-content-center align-items-center">
                                 <span>{{ teams[1].name }}</span>
                                 <i class="fas fa-edit ml-2" @click="editTeam(1)"></i>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team2Position2" v-on:player-clicked="openPlayerOptions(1, 2)"></player>
                             <player v-model="team2Position1" v-on:player-clicked="openPlayerOptions(1, 1)"></player>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team2Position3" v-on:player-clicked="openPlayerOptions(1, 3)"></player>
                             <player v-model="team2Position6" v-on:player-clicked="openPlayerOptions(1, 6)"></player>
                         </div>
-                        <div class="row">
+                        <div class="row flex-grow-1">
                             <player v-model="team2Position4" v-on:player-clicked="openPlayerOptions(1, 4)"></player>
                             <player v-model="team2Position5" v-on:player-clicked="openPlayerOptions(1, 5)"></player>
                         </div>
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-1">
+            <div class="row mt-3 mb-5">
                 <div class="col">
                     <div v-if="teams[0] !== undefined" class="col d-flex justify-content-center">
                         <b-button class="btn-lg" variant="warning" @click.prevent="rotate(0)">
@@ -259,9 +259,13 @@
         <b-modal ref="player-options" hide-footer title="Player options">
             <div class="row">
                 <div class="col">
-                    <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="makeSetter()" type="button"
+                    <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" class="mt-1 mb-1 btn-lg btn-block" @click.prevent="unhighlight()" type="button"
+                    variant="primary">
+                        Unhighlight
+                    </b-button>
+                    <b-button v-else class="mt-1 mb-1 btn-lg btn-block" @click.prevent="highlight()" type="button"
                         variant="primary">
-                        Highlight setter
+                        Highlight
                     </b-button>
                     <b-button class="mt-1 mb-1 btn-lg btn-block" @click.prevent="openSubOptions()" type="button"
                         variant="primary">
@@ -310,7 +314,7 @@
             },
             computed: {
                 borderStyle() {
-                    return this.value.isSetter === true ? 'border-warning' : 'border-primary';
+                    return this.value.isHighlighted === true ? 'border-warning' : 'border-primary';
                 },
             },
         });
@@ -389,7 +393,7 @@
                             playerNumber: this.teamEntry.players[i],
                             startingPosition: i + 1,
                             position: i + 1,
-                            isSetter: false,
+                            isHighlighted: false,
                         });
                     }
 
@@ -413,7 +417,7 @@
                             playerNumber: this.teamEntry.players[i],
                             startingPosition: i + 1,
                             position: i + 1,
-                            isSetter: false,
+                            isHighlighted: false,
                         });
                     }
 
@@ -457,14 +461,27 @@
                     };
                     this.$refs['player-options'].show();
                 },
-                makeSetter() {
+                highlight() {
                     let team = this.teams[this.playerToUpdate.teamNumber];
-                    for (var i = 0; i < team.players.length; i++) {
-                        let player = team.players[i];
-                        player.isSetter = (player.position === this.playerToUpdate.position);
-                    }
+                    let player = team.players.find(x => x.position === this.playerToUpdate.position);
+                    player.isHighlighted = true;
                     this.copyTeams();
                     this.$refs['player-options'].hide();
+                },
+                unhighlight() {
+                    let team = this.teams[this.playerToUpdate.teamNumber];
+                    let player = team.players.find(x => x.position === this.playerToUpdate.position);
+                    player.isHighlighted = false;
+                    this.copyTeams();
+                    this.$refs['player-options'].hide();
+                },
+                isPlayerToUpdateCurrentlyHighlighted() {
+                    if (!this.playerToUpdate) {
+                        return false;
+                    }
+                    let team = this.teams[this.playerToUpdate.teamNumber];
+                    let player = team.players.find(x => x.position === this.playerToUpdate.position);
+                    return player.isHighlighted;
                 },
                 openSubOptions() {
                     this.$refs['player-options'].hide();
@@ -475,6 +492,7 @@
                     let team = this.teams[this.playerToUpdate.teamNumber];
                     let player = team.players.find(x => x.position === this.playerToUpdate.position);
                     player.playerNumber = this.subForPlayerNumber;
+                    player.isHighlighted = false;
                     this.$refs['sub-options'].hide();
                 },
                 swap() {
