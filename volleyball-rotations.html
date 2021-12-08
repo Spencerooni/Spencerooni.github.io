@@ -170,7 +170,7 @@
             <b-form autocomplete="off" @submit.prevent="submitTeam()">
                 <div class="row">
                     <div class="col">
-                        <b-form-input v-model="teamEntry.name" type="text" required placeholder="Team name">
+                        <b-form-input v-model="teamEntry.name" type="text" required placeholder="Team name" autofocus>
                         </b-form-input>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                     </div>
                     <div class="col">
                         <b-form-input v-model="subForPlayerNumber" type="text" id="sub-for-player-number" required
-                            placeholder="" pattern="[0-9]*" inputmode="numeric">
+                            placeholder="" pattern="[0-9]*" inputmode="numeric" autofocus>
                         </b-form-input>
                     </div>
                 </div>
