@@ -10,6 +10,9 @@
     <script src="index.js" defer></script>
     <link rel="manifest" href="manifest.webmanifest">
 
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Volleyball Rotations">
@@ -170,7 +173,7 @@
             <b-form autocomplete="off" @submit.prevent="submitTeam()">
                 <div class="row">
                     <div class="col">
-                        <b-form-input v-model="teamEntry.name" type="text" required placeholder="Team name" autofocus>
+                        <b-form-input v-model="teamEntry.name" type="text" required placeholder="Team name">
                         </b-form-input>
                     </div>
                 </div>
@@ -259,7 +262,7 @@
         <b-modal ref="player-options" hide-footer title="Player options">
             <div class="row">
                 <div class="col">
-                    <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" @click.prevent="unhighlight()" type="button" variant="primary">
+                    <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" class="mt-1 mb-1 btn-lg btn-block" @click.prevent="unhighlight()" type="button" variant="primary">
                         Unhighlight
                     </b-button>
                     <b-button v-else class="mt-1 mb-1 btn-lg btn-block" @click.prevent="highlight()" type="button" variant="primary">
@@ -280,7 +283,7 @@
                     </div>
                     <div class="col">
                         <b-form-input v-model="subForPlayerNumber" type="text" id="sub-for-player-number" required
-                            placeholder="" pattern="[0-9]*" inputmode="numeric" autofocus>
+                            placeholder="" pattern="[0-9]*" inputmode="numeric">
                         </b-form-input>
                     </div>
                 </div>
@@ -375,7 +378,6 @@
                 },
             },
             data: {
-                name: '',
                 teams: [],
                 teamEntry: {
                     number: null,
@@ -521,6 +523,7 @@
                     this.$refs['confirm-reset'].show();
                 },
                 confirmReset() {
+                    this.playerToUpdate = null;
                     this.teams = [];
                     this.$refs['confirm-reset'].hide();
                 },
