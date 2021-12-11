@@ -161,7 +161,7 @@
             </div>
         </b-container>
 
-        <b-modal ref="team-setup" hide-footer title="Team setup">
+        <b-modal ref="team-setup" hide-footer title="Team setup" centered="true">
             <b-form autocomplete="off" @submit.prevent="submitTeam()">
                 <div class="row">
                     <div class="col">
@@ -206,7 +206,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="edit-team" hide-footer title="Change team">
+        <b-modal ref="edit-team" hide-footer title="Change team" centered="true">
             <b-form autocomplete="off" @submit.prevent="submitTeamChanges()">
                 <div class="row">
                     <div class="col">
@@ -251,7 +251,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="player-options" hide-footer title="Player options">
+        <b-modal ref="player-options" hide-footer title="Player options" centered="true">
             <div class="row">
                 <div class="col">
                     <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" class="mt-1 mb-1 btn-lg btn-block" @click.prevent="unhighlight()" type="button" variant="primary">
@@ -267,7 +267,7 @@
             </div>
         </b-modal>
 
-        <b-modal ref="sub-options" hide-footer title="Substitution">
+        <b-modal ref="sub-options" hide-footer title="Substitution" centered="true">
             <b-form autocomplete="off" @submit.prevent="confirmSub()">
                 <div class="row">
                     <div class="col">
@@ -287,7 +287,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="confirm-reset" hide-footer title="Reset">
+        <b-modal ref="confirm-reset" hide-footer title="Reset" centered="true">
             <b-form autocomplete="off" @submit.prevent="confirmReset()">
                 <div class="row">
                     <div class="col">
@@ -297,8 +297,6 @@
                 <div class="row mt-2">
                     <div class="col">
                         <b-button class="btn-lg btn-block" type="submit" variant="danger">Yes</b-button>
-                    </div>
-                    <div class="col">
                         <b-button class="btn-lg btn-block" type="button" variant="light" @click="cancelReset()">No</b-button>
                     </div>
                 </div>
