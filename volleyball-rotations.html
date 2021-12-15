@@ -58,7 +58,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-    <script src="https://kit.fontawesome.com/1f9e195355.js"></script>
+    <script src="https://kit.fontawesome.com/dd64ac2ee5.js" crossorigin="anonymous"></script>
 
     <style type="text/css">
         .flip-list-move {
@@ -78,7 +78,9 @@
                         <div class="row flex-grow-1">
                             <div class="col d-flex justify-content-center align-items-center">
                                 <span>{{ teams[0].name }}</span>
-                                <i class="fas fa-edit ms-2" @click="editTeam(0)"></i>
+                                <span @click="editTeam(0)">
+                                    <i class="fas fa-edit ms-2"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="row flex-grow-1">
@@ -117,7 +119,9 @@
                         <div class="row flex-grow-1">
                             <div class="col d-flex justify-content-center align-items-center">
                                 <span>{{ teams[1].name }}</span>
-                                <i class="fas fa-edit ms-2" @click="editTeam(1)"></i>
+                                <span @click="editTeam(1)">
+                                    <i class="fas fa-edit ms-2" @click="editTeam(1)"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="row flex-grow-1">
@@ -161,7 +165,7 @@
             </div>
         </b-container>
 
-        <b-modal ref="team-setup" hide-footer title="Team setup" centered="true">
+        <b-modal ref="team-setup" hide-footer title="Team setup" :centered="true">
             <b-form autocomplete="off" @submit.prevent="submitTeam()">
                 <div class="row">
                     <div class="col">
@@ -206,7 +210,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="edit-team" hide-footer title="Change team" centered="true">
+        <b-modal ref="edit-team" hide-footer title="Change team" :centered="true">
             <b-form autocomplete="off" @submit.prevent="submitTeamChanges()">
                 <div class="row">
                     <div class="col">
@@ -251,7 +255,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="player-options" hide-footer title="Player options" centered="true">
+        <b-modal ref="player-options" hide-footer title="Player options" :centered="true">
             <div class="row">
                 <div class="col">
                     <b-button v-if="isPlayerToUpdateCurrentlyHighlighted()" class="mt-1 mb-1 btn-lg btn-block" @click.prevent="unhighlight()" type="button" variant="primary">
@@ -267,7 +271,7 @@
             </div>
         </b-modal>
 
-        <b-modal ref="sub-options" hide-footer title="Substitution" centered="true">
+        <b-modal ref="sub-options" hide-footer title="Substitution" :centered="true">
             <b-form autocomplete="off" @submit.prevent="confirmSub()">
                 <div class="row">
                     <div class="col">
@@ -287,7 +291,7 @@
             </b-form>
         </b-modal>
 
-        <b-modal ref="confirm-reset" hide-footer title="Reset" centered="true">
+        <b-modal ref="confirm-reset" hide-footer title="Reset" :centered="true">
             <b-form autocomplete="off" @submit.prevent="confirmReset()">
                 <div class="row">
                     <div class="col">
