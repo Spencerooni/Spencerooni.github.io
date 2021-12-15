@@ -85,7 +85,7 @@
                         </div>
                         <div class="row flex-grow-1">
                             <transition-group name="flip-list" tag="div" class="d-flex flex-wrap">
-                                <player v-bind:key="index" v-for="(player, index) in teams[0].players" v-model="teams[0].players[index]" :class="['w-50', getOrder(0, player.position)]" v-on:player-clicked="openPlayerOptions(0, player.position)"></player>
+                                <player v-bind:key="'player-' + index" v-for="(player, index) in teams[0].players" v-model="teams[0].players[index]" :class="['w-50', getOrder(0, player.position)]" v-on:player-clicked="openPlayerOptions(0, player.position)"></player>
                             </transition-group>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="row flex-grow-1">
                             <transition-group name="flip-list" tag="div" class="d-flex flex-wrap">
-                                <player v-bind:key="index" v-for="(player, index) in teams[1].players" v-model="teams[1].players[index]" :class="['w-50', getOrder(1, player.position)]" v-on:player-clicked="openPlayerOptions(1, player.position)"></player>
+                                <player v-bind:key="'player-' + index" v-for="(player, index) in teams[1].players" v-model="teams[1].players[index]" :class="['w-50', getOrder(1, player.position)]" v-on:player-clicked="openPlayerOptions(1, player.position)"></player>
                             </transition-group>
                         </div>
                     </div>
